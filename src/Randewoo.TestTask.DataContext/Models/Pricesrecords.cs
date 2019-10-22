@@ -1,0 +1,28 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace Randewoo.TestTask.DataContext.Models
+{
+    public partial class Pricesrecords
+    {
+        public Pricesrecords()
+        {
+            Links = new HashSet<Links>();
+        }
+
+        public int Recordindex { get; set; }
+        public Guid Priceid { get; set; }
+        public string Name { get; set; }
+        public byte State { get; set; }
+        public bool Used { get; set; }
+        public double Price { get; set; }
+        public bool Deleted { get; set; }
+        public string Comment { get; set; }
+        public string Sku { get; set; }
+        public int Stock { get; set; }
+        public int Instock { get; set; }
+
+        public virtual Prices PriceNavigation { get; set; }
+        public virtual ICollection<Links> Links { get; set; }
+    }
+}
