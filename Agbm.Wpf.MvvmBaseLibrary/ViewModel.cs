@@ -1,9 +1,11 @@
-﻿using System;
+﻿
+
+using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Linq;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Agbm.Wpf.MvvmBaseLibrary
 {
@@ -16,7 +18,7 @@ namespace Agbm.Wpf.MvvmBaseLibrary
         protected virtual string OnValidate(string propertyName)
         {
             ValidationContext validationContext = new ValidationContext(this) {DisplayName = propertyName};
-            var errorsCollection = new Collection<ValidationResult>();
+            var errorsCollection = new Collection< ValidationResult >();
 
             if (Validator.TryValidateProperty(this, validationContext, errorsCollection)) {
 
@@ -64,14 +66,8 @@ namespace Agbm.Wpf.MvvmBaseLibrary
                 }
 
                 if ( e.NewItems?[ 0 ] == null && e.OldItems?[ 0 ] == null ) {
-                    try {
-                        observator.Clear();
-                    }
-                    catch ( Exception ex ) {
-                        ;
-                    }
+                    observator.Clear();
                 }
-
             };
         }
     }
