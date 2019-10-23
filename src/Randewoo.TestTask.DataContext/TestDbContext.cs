@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Randewoo.TestTask.DataContext
 {
-    public partial  class TestContext : DbContext
+    public partial  class TestDbContext : DbContext
     {
-        public TestContext()
+        public TestDbContext()
         {
         }
 
-        public TestContext (DbContextOptions< TestContext > options )
+        public TestDbContext (DbContextOptions< TestDbContext > options )
             : base(options)
         {
         }
@@ -27,7 +27,7 @@ namespace Randewoo.TestTask.DataContext
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=test;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=test_test;Trusted_Connection=True;");
             }
         }
 
