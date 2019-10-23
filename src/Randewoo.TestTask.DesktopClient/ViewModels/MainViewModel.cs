@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Agbm.Wpf.MvvmBaseLibrary;
 using Microsoft.EntityFrameworkCore;
 using Randewoo.TestTask.DataContext;
@@ -44,6 +45,22 @@ namespace Randewoo.TestTask.DesktopClient.ViewModels
                     OnPropertyChanged();
                 }
             }
+        }
+
+        public ICollection< ProductViewModel > ProductVmCollection { get; private set; }
+
+
+        public ICommand AnalysisAsyncCommand => new MvvmAsyncCommand( AnalysisAsync, CanAnalyse );
+
+        private async Task AnalysisAsync( object o )
+        {
+            var products = await _dbContext.GetProducts( SelectedDistributorVm.SelectedPriceVm.Id ).ToArrayAsync();
+
+        }
+
+        public bool CanAnalyse( object o )
+        {
+            return SelectedDistributorVm?.SelectedPriceVm != null;
         }
     }
 }

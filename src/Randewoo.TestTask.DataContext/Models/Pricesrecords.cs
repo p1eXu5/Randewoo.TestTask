@@ -11,6 +11,7 @@ namespace Randewoo.TestTask.DataContext.Models
         }
 
         public int RecordIndex { get; set; }
+
         public Guid Priceid { get; set; }
         public string Name { get; set; }
         public byte State { get; set; }

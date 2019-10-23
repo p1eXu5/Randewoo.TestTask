@@ -7,7 +7,7 @@ namespace Randewoo.TestTask.DataContext.Models
     {
         public Manufacturers()
         {
-            Products = new HashSet<Products>();
+            Products = new HashSet<Product>();
         }
 
         public Guid Id { get; set; }
@@ -17,6 +17,6 @@ namespace Randewoo.TestTask.DataContext.Models
         public string Description { get; set; }
         public bool? Published { get; set; }
 
-        public virtual ICollection<Products> Products { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

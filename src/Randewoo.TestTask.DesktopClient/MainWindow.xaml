@@ -32,7 +32,7 @@
                           />
                 <ComboBox Style="{StaticResource st_MenuComboBox}" 
                           />
-                <Button>Анализ</Button>
+                <Button Command="{Binding AnalysisAsyncCommand}">Анализ</Button>
             </ToolBar>
         </ToolBarTray>
 

@@ -20,7 +20,7 @@ namespace Randewoo.TestTask.DataContext
         public virtual DbSet<Manufacturers> Manufacturers { get; set; }
         public virtual DbSet<Price> Prices { get; set; }
         public virtual DbSet<PricesRecords> PricesRecords { get; set; }
-        public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -83,7 +83,7 @@ namespace Randewoo.TestTask.DataContext
                 entity.Property(e => e.Sendmail).HasColumnName("SENDMAIL");
             });
 
-            modelBuilder.Entity<Link>(entity =>
+            modelBuilder.Entity< Link >(entity =>
             {
                 entity.ToTable("LINKS");
 
@@ -95,22 +95,22 @@ namespace Randewoo.TestTask.DataContext
                     .HasColumnName("ID")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.Catalogproductid).HasColumnName("CATALOGPRODUCTID");
+                entity.Property(e => e.ProductId).HasColumnName("CATALOGPRODUCTID");
 
                 entity.Property(e => e.Pricerecordindex).HasColumnName("PRICERECORDINDEX");
 
-                entity.HasOne(d => d.Catalogproduct)
+                entity.HasOne(d => d.Product)
                     .WithMany(p => p.Links)
-                    .HasForeignKey(d => d.Catalogproductid)
+                    .HasForeignKey(d => d.ProductId)
                     .HasConstraintName("LINKSFOREIGNCATALOGPRODUCT");
 
-                entity.HasOne(d => d.PricerecordindexNavigation)
+                entity.HasOne(d => d.PriceRecord)
                     .WithMany(p => p.Links)
                     .HasForeignKey(d => d.Pricerecordindex)
                     .HasConstraintName("LINKSFOREIGNPRICERECORD");
             });
 
-            modelBuilder.Entity<Manufacturers>(entity =>
+            modelBuilder.Entity< Manufacturers >(entity =>
             {
                 entity.ToTable("MANUFACTURERS");
 
@@ -148,7 +148,7 @@ namespace Randewoo.TestTask.DataContext
                     .HasDefaultValueSql("((1))");
             });
 
-            modelBuilder.Entity<Price>(entity =>
+            modelBuilder.Entity< Price >(entity =>
             {
                 entity.ToTable("PRICES");
 
@@ -256,7 +256,7 @@ namespace Randewoo.TestTask.DataContext
                     .HasConstraintName("PRICESFOREIGNDISTRIBUTOR");
             });
 
-            modelBuilder.Entity<PricesRecords>(entity =>
+            modelBuilder.Entity< PricesRecords >(entity =>
             {
                 entity.HasKey(e => e.RecordIndex)
                     .HasName("PRICESRECORDSPRIMARY");
@@ -308,7 +308,7 @@ namespace Randewoo.TestTask.DataContext
                     .HasConstraintName("PRICESRECORDSFOREIGNPRICE");
             });
 
-            modelBuilder.Entity<Products>(entity =>
+            modelBuilder.Entity<Product>(entity =>
             {
                 entity.ToTable("PRODUCTS");
 
@@ -339,7 +339,7 @@ namespace Randewoo.TestTask.DataContext
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.Childname)
+                entity.Property(e => e.ChildName)
                     .IsRequired()
                     .HasColumnName("CHILDNAME")
                     .HasMaxLength(1024)

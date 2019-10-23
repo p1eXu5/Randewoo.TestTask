@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Randewoo.TestTask.DataContext.Models
 {
-    public partial class Products
+    public partial class Product
     {
-        public Products()
+        public Product()
         {
             Links = new HashSet<Link>();
         }
@@ -26,7 +26,7 @@ namespace Randewoo.TestTask.DataContext.Models
         public bool? Productexists { get; set; }
         public bool Photoexists { get; set; }
         public int Viewstyleid { get; set; }
-        public string Childname { get; set; }
+        public string ChildName { get; set; }
         public bool Tester { get; set; }
         public bool? Published { get; set; }
         public DateTime Createdate { get; set; }
