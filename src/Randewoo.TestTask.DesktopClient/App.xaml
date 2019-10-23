@@ -2,11 +2,10 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Randewoo.TestTask.DesktopClient"
-             StartupUri="MainWindow.xaml">
+             >
     <Application.Resources>
          <ResourceDictionary>
              <ResourceDictionary.MergedDictionaries>
-                 <!--<ResourceDictionary Source="pack://Application:,,,/Randewoo.TestTask.DesktopClient;component/Styles/ComboBoxStyle.xaml" />-->
              </ResourceDictionary.MergedDictionaries>
          </ResourceDictionary>
     </Application.Resources>
