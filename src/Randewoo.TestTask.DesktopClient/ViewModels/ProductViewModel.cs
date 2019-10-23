@@ -20,7 +20,7 @@ namespace Randewoo.TestTask.DesktopClient.ViewModels
 
         public Guid Id => _product.Id;
 
-        public string Name => $"{_product.Name} {_product.ChildName}";
+        public string Name => $"{_product.Name}, {_product.ChildName}";
 
         public double Price => _product.Price;
 

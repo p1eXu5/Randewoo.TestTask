@@ -17,16 +17,14 @@ namespace Randewoo.TestTask.DataContext
 
         public static IQueryable< Product > GetProducts( this TestDbContext context, Guid priceId )
         {
-            var priceRecords = context.Prices.Include( p => p.PricesRecords )
+            return (from p in context.Prices.Include( p => p.PricesRecords )
                                       .ThenInclude( pr => pr.Links )
                                       .ThenInclude( l => l.Product )
-                                      .First( p => p.Id == priceId )
-                                      .PricesRecords;
-
-            return (from pr in priceRecords
+                    where p.Id == priceId
+                    from pr in p.PricesRecords 
                     where !pr.Deleted && pr.Used
                     from link in pr.Links
-                    select link.Product).AsQueryable();
+                    select link.Product).Where( p => !p.Deleted ).AsQueryable();
         }
     }
 }

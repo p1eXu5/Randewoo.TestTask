@@ -41,12 +41,61 @@
         </StatusBar>
 
         <Grid>
+            <Grid.Resources>
+                <Style x:Key="RowStyleWithAlternation" TargetType="DataGridRow">
+                    <Setter Property="SnapsToDevicePixels" Value="True" />
+                    <Setter Property="Background" Value="GhostWhite"/>
+                    <Setter Property="FontWeight" Value="Normal"/>
+                    <Setter Property="ContextMenu" Value="{x:Null}"/>
+                    <Style.Triggers>
+                        <Trigger Property="AlternationIndex" Value="1">
+                            <Setter Property="Background" Value="AliceBlue" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#F9F99F"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#F9F99F" />
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="True" >
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect Color="Red" ShadowDepth="0" BlurRadius="20" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="BorderThickness" Value="2" />
+                            <Setter Property="BorderBrush" Value="Red" />
+                            <Setter Property="Foreground" Value="Blue" />
+                            <Setter Property="FontSize" Value="12" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Resources>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="3" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <DataGrid></DataGrid>
+            <DataGrid x:Name="m_ProductTable" 
+                      ItemsSource="{Binding ProductVmCollection}" 
+                      IsReadOnly="True"
+                      RowStyle="{StaticResource RowStyleWithAlternation}"
+                      
+                      AlternationCount="2"
+                      AutoGenerateColumns="False"
+                      HorizontalGridLinesBrush="LightBlue"
+                      VerticalGridLinesBrush="Silver"
+                      >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Наименование" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Цена" Binding="{Binding Price}" />
+                    <DataGridTextColumn Header="Минимальная цена" Binding="{Binding MinPrice}" />
+                    <DataGridTextColumn Header="Разница" Binding="{Binding DiffPrice}" />
+                    <DataGridTextColumn Header="Прайс-лист" Binding="{Binding PriceList}" />
+                    <DataGridTextColumn Header="Поставщик" Binding="{Binding Distributor}" />
+                    <DataGridTextColumn Header="Примечание" Binding="{Binding Notice}" />
+                </DataGrid.Columns>
+            </DataGrid>
             <GridSplitter Grid.Row="1" 
                        VerticalAlignment="Stretch" 
                        HorizontalAlignment="Stretch"

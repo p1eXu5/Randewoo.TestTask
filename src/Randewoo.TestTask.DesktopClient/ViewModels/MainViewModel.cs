@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace Randewoo.TestTask.DesktopClient.ViewModels
     {
         private readonly TestDbContext _dbContext;
         private DistributorViewModel _selectedDistributorVm;
+        private ProductViewModel[] _productVmCollection;
 
         public MainViewModel( TestDbContext dbContext )
         {
@@ -47,7 +49,7 @@ namespace Randewoo.TestTask.DesktopClient.ViewModels
             }
         }
 
-        public ICollection< ProductViewModel > ProductVmCollection { get; private set; }
+        public ICollection< ProductViewModel > ProductVmCollection => _productVmCollection;
 
 
         public ICommand AnalysisAsyncCommand => new MvvmAsyncCommand( AnalysisAsync, CanAnalyse );
@@ -55,7 +57,8 @@ namespace Randewoo.TestTask.DesktopClient.ViewModels
         private async Task AnalysisAsync( object o )
         {
             var products = await _dbContext.GetProducts( SelectedDistributorVm.SelectedPriceVm.Id ).ToArrayAsync();
-
+            _productVmCollection = products.Select( p => new ProductViewModel( p ) ).ToArray();
+            OnPropertyChanged( nameof( ProductVmCollection ) );
         }
 
         public bool CanAnalyse( object o )
