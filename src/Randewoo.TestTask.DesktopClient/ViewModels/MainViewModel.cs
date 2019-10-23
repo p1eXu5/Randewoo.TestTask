@@ -13,9 +13,20 @@ namespace Randewoo.TestTask.DesktopClient.ViewModels
         private readonly TestDbContext _dbContext;
         public MainViewModel( TestDbContext dbContext )
         {
+            void LoadDistributors()
+            {
+                DistributorVmCollection = _dbContext.GetDistributors()
+                                                    .Where( d => d.Active && d.Prices.Any( p => p.IsActive.HasValue && p.IsActive.Value ) )
+                                                    .Select( d => new DistributorViewModel( d ) )
+                                                    .ToArray();
+            }
+
+
             _dbContext = dbContext;
+
+            LoadDistributors();
         }
 
-
+        public ICollection< DistributorViewModel > DistributorVmCollection { get; private set; }
     }
 }
