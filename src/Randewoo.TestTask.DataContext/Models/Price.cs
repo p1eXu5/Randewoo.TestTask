@@ -3,18 +3,17 @@ using System.Collections.Generic;
 
 namespace Randewoo.TestTask.DataContext.Models
 {
-    public partial class Prices
+    public class Price
     {
-        public Prices()
+        public Price()
         {
-            Pricesrecords = new HashSet<Pricesrecords>();
+            PricesRecords = new HashSet<PricesRecords>();
         }
 
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public Guid? Disid { get; set; }
         public double Discount { get; set; }
-        public byte Defaultcurrency { get; set; }
+        public byte DefaultCurrency { get; set; }
         public double Turndollarsrate { get; set; }
         public string Sheet { get; set; }
         public string Namerange { get; set; }
@@ -29,9 +28,11 @@ namespace Randewoo.TestTask.DataContext.Models
         public string Skurange { get; set; }
         public string Stockrange { get; set; }
         public string Instockrange { get; set; }
-        public bool? Isactive { get; set; }
+        public bool? IsActive { get; set; }
 
-        public virtual Distributors Dis { get; set; }
-        public virtual ICollection<Pricesrecords> Pricesrecords { get; set; }
+        public Guid? DistributorId { get; set; }
+        public Distributor Distributor { get; set; }
+
+        public ICollection<PricesRecords> PricesRecords { get; set; }
     }
 }

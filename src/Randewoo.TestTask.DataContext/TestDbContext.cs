@@ -15,25 +15,24 @@ namespace Randewoo.TestTask.DataContext
         {
         }
 
-        public virtual DbSet<Distributors> Distributors { get; set; }
-        public virtual DbSet<Links> Links { get; set; }
+        public virtual DbSet<Distributor> Distributors { get; set; }
+        public virtual DbSet< Link > Links { get; set; }
         public virtual DbSet<Manufacturers> Manufacturers { get; set; }
-        public virtual DbSet<Prices> Prices { get; set; }
-        public virtual DbSet<Pricesrecords> Pricesrecords { get; set; }
+        public virtual DbSet<Price> Prices { get; set; }
+        public virtual DbSet<PricesRecords> PricesRecords { get; set; }
         public virtual DbSet<Products> Products { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=test_test;Trusted_Connection=True;");
             }
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating( ModelBuilder modelBuilder )
         {
-            modelBuilder.Entity<Distributors>(entity =>
+            modelBuilder.Entity< Distributor >(entity =>
             {
                 entity.ToTable("DISTRIBUTORS");
 
@@ -84,7 +83,7 @@ namespace Randewoo.TestTask.DataContext
                 entity.Property(e => e.Sendmail).HasColumnName("SENDMAIL");
             });
 
-            modelBuilder.Entity<Links>(entity =>
+            modelBuilder.Entity<Link>(entity =>
             {
                 entity.ToTable("LINKS");
 
@@ -149,7 +148,7 @@ namespace Randewoo.TestTask.DataContext
                     .HasDefaultValueSql("((1))");
             });
 
-            modelBuilder.Entity<Prices>(entity =>
+            modelBuilder.Entity<Price>(entity =>
             {
                 entity.ToTable("PRICES");
 
@@ -171,11 +170,11 @@ namespace Randewoo.TestTask.DataContext
                     .HasMaxLength(1024)
                     .HasDefaultValueSql("('')");
 
-                entity.Property(e => e.Defaultcurrency).HasColumnName("DEFAULTCURRENCY");
+                entity.Property(e => e.DefaultCurrency).HasColumnName("DEFAULTCURRENCY");
 
                 entity.Property(e => e.Discount).HasColumnName("DISCOUNT");
 
-                entity.Property(e => e.Disid).HasColumnName("DISID");
+                entity.Property(e => e.DistributorId).HasColumnName("DISID");
 
                 entity.Property(e => e.Filedate)
                     .HasColumnName("FILEDATE")
@@ -199,7 +198,7 @@ namespace Randewoo.TestTask.DataContext
                     .HasMaxLength(16)
                     .HasDefaultValueSql("('')");
 
-                entity.Property(e => e.Isactive)
+                entity.Property(e => e.IsActive)
                     .IsRequired()
                     .HasColumnName("ISACTIVE")
                     .HasDefaultValueSql("((1))");
@@ -250,25 +249,25 @@ namespace Randewoo.TestTask.DataContext
 
                 entity.Property(e => e.Turndollarsrate).HasColumnName("TURNDOLLARSRATE");
 
-                entity.HasOne(d => d.Dis)
+                entity.HasOne(d => d.Distributor)
                     .WithMany(p => p.Prices)
-                    .HasForeignKey(d => d.Disid)
+                    .HasForeignKey(d => d.DistributorId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("PRICESFOREIGNDISTRIBUTOR");
             });
 
-            modelBuilder.Entity<Pricesrecords>(entity =>
+            modelBuilder.Entity<PricesRecords>(entity =>
             {
-                entity.HasKey(e => e.Recordindex)
+                entity.HasKey(e => e.RecordIndex)
                     .HasName("PRICESRECORDSPRIMARY");
 
                 entity.ToTable("PRICESRECORDS");
 
-                entity.HasIndex(e => e.Recordindex)
+                entity.HasIndex(e => e.RecordIndex)
                     .HasName("PRICESRECORDSUNIQUEINDEX")
                     .IsUnique();
 
-                entity.Property(e => e.Recordindex).HasColumnName("RECORDINDEX");
+                entity.Property(e => e.RecordIndex).HasColumnName("RECORDINDEX");
 
                 entity.Property(e => e.Comment)
                     .IsRequired()
@@ -304,7 +303,7 @@ namespace Randewoo.TestTask.DataContext
                 entity.Property(e => e.Used).HasColumnName("USED");
 
                 entity.HasOne(d => d.PriceNavigation)
-                    .WithMany(p => p.Pricesrecords)
+                    .WithMany(p => p.PricesRecords)
                     .HasForeignKey(d => d.Priceid)
                     .HasConstraintName("PRICESRECORDSFOREIGNPRICE");
             });

@@ -7,7 +7,7 @@ namespace Randewoo.TestTask.DataContext.Models
     {
         public Products()
         {
-            Links = new HashSet<Links>();
+            Links = new HashSet<Link>();
         }
 
         public Guid Id { get; set; }
@@ -45,6 +45,6 @@ namespace Randewoo.TestTask.DataContext.Models
         public byte Defaultcurrency { get; set; }
 
         public virtual Manufacturers Man { get; set; }
-        public virtual ICollection<Links> Links { get; set; }
+        public virtual ICollection<Link> Links { get; set; }
     }
 }

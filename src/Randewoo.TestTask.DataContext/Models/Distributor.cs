@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace Randewoo.TestTask.DataContext.Models
 {
-    public partial class Distributors
+    public class Distributor
     {
-        public Distributors()
+        public Distributor()
         {
-            Prices = new HashSet<Prices>();
+            Prices = new HashSet<Price>();
         }
 
         public Guid Id { get; set; }
@@ -23,6 +23,6 @@ namespace Randewoo.TestTask.DataContext.Models
         public byte? Priority { get; set; }
         public int? Dealerorder { get; set; }
 
-        public virtual ICollection<Prices> Prices { get; set; }
+        public ICollection<Price> Prices { get; set; }
     }
 }

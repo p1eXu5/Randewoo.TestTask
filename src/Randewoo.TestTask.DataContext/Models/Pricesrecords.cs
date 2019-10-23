@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 namespace Randewoo.TestTask.DataContext.Models
 {
-    public partial class Pricesrecords
+    public class PricesRecords
     {
-        public Pricesrecords()
+        public PricesRecords()
         {
-            Links = new HashSet<Links>();
+            Links = new HashSet<Link>();
         }
 
-        public int Recordindex { get; set; }
+        public int RecordIndex { get; set; }
         public Guid Priceid { get; set; }
         public string Name { get; set; }
         public byte State { get; set; }
@@ -22,7 +22,7 @@ namespace Randewoo.TestTask.DataContext.Models
         public int Stock { get; set; }
         public int Instock { get; set; }
 
-        public virtual Prices PriceNavigation { get; set; }
-        public virtual ICollection<Links> Links { get; set; }
+        public Price PriceNavigation { get; set; }
+        public ICollection< Link > Links { get; set; }
     }
 }
