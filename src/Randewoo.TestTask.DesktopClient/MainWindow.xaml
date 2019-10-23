@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Randewoo.TestTask.DesktopClient"
+        xmlns:vm="clr-namespace:Randewoo.TestTask.DesktopClient.ViewModels"
+        d:DataContext="{ d:DesignInstance vm:MainViewModel}"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="900">
     <DockPanel LastChildFill="True">
@@ -17,9 +19,19 @@
                         <Setter Property="Margin" Value="0,0,5,0" />
                     </Style>
                 </ToolBar.Resources>
-                <ComboBox Style="{StaticResource st_MenuComboBox}" />
-                <ComboBox Style="{StaticResource st_MenuComboBox}" />
-                <ComboBox Style="{StaticResource st_MenuComboBox}" />
+                <ComboBox x:Name="m_DistributorSelector" Style="{StaticResource st_MenuComboBox}" 
+                          ItemsSource="{Binding DistributorVmCollection}"
+                          DisplayMemberPath="Name"
+                          SelectedItem="{Binding SelectedDistributorVm}"
+                          />
+                <ComboBox Style="{StaticResource st_MenuComboBox}"
+                          DataContext="{Binding ElementName=m_DistributorSelector, Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}"
+                          ItemsSource="{Binding PriceVmCollection}"
+                          DisplayMemberPath="Name"
+                          SelectedItem="{Binding SelectedPriceVm}"
+                          />
+                <ComboBox Style="{StaticResource st_MenuComboBox}" 
+                          />
                 <Button>Анализ</Button>
             </ToolBar>
         </ToolBarTray>

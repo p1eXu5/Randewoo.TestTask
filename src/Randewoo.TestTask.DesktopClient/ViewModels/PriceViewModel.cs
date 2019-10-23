@@ -11,6 +11,7 @@ namespace Randewoo.TestTask.DesktopClient.ViewModels
     public class PriceViewModel : ViewModel
     {
         private readonly Price _price;
+
         public PriceViewModel( Price price )
         {
             _price = price;
