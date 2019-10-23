@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29411.138
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Randewoo.TestTask.DataContext", "src\Randewoo.TestTask.DataContext\Randewoo.TestTask.DataContext.csproj", "{AC1B9B38-2BBE-4F83-9C10-057DC16A6E89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Randewoo.TestTask.DataContext", "src\Randewoo.TestTask.DataContext\Randewoo.TestTask.DataContext.csproj", "{AC1B9B38-2BBE-4F83-9C10-057DC16A6E89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Randewoo.TestTask.DesktopClient", "src\Randewoo.TestTask.DesktopClient\Randewoo.TestTask.DesktopClient.csproj", "{3BFA806C-80A9-4FFC-8635-1F841D8422BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Randewoo.TestTask.DesktopClient", "src\Randewoo.TestTask.DesktopClient\Randewoo.TestTask.DesktopClient.csproj", "{3BFA806C-80A9-4FFC-8635-1F841D8422BB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E68CBD17-21E2-42B3-98B8-5E10D8353D69}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BCE93D61-D7F3-4126-AF32-FE4CF76C6407}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +28,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AC1B9B38-2BBE-4F83-9C10-057DC16A6E89} = {BCE93D61-D7F3-4126-AF32-FE4CF76C6407}
+		{3BFA806C-80A9-4FFC-8635-1F841D8422BB} = {BCE93D61-D7F3-4126-AF32-FE4CF76C6407}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {39E4DF5B-81F8-41E4-A1CD-19732F1CAD06}
