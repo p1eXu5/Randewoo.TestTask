@@ -24,5 +24,12 @@ namespace Randewoo.TestTask.DesktopClient
         {
             InitializeComponent();
         }
+
+        private void M_FilterSelector_OnSelectionChanged( object sender, SelectionChangedEventArgs e )
+        {
+            if ( m_ProductTable != null ) {
+                CollectionViewSource.GetDefaultView( m_ProductTable.ItemsSource ).Refresh();
+            }
+        }
     }
 }

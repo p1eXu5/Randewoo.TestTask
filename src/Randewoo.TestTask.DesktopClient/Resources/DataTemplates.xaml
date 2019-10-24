@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=System.Runtime"
                     xmlns:vm="clr-namespace:Randewoo.TestTask.DesktopClient.ViewModels"
+                    xmlns:infr="clr-namespace:Randewoo.TestTask.DesktopClient.Infrastructure"
                     >
     
     <DataTemplate x:Key="dt_PositiveDiffPrice" DataType="vm:ProductViewModel">
@@ -49,6 +50,81 @@
 
     <DataTemplate x:Key="dt_DefaultDiffPrice" DataType="vm:ProductViewModel">
         <TextBlock Margin="15,0,0,0" Text="{Binding DiffPrice, StringFormat={}{0:#}}"></TextBlock>
+    </DataTemplate>
+
+
+    <!-- min price templates -->
+
+    <DataTemplate x:Key="dt_DefaultMinPrice" DataType="vm:ProductViewModel">
+        <Border infr:FilterElement.Filter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=DataGrid}, 
+                                            Path=(infr:FilterElement.Filter), UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
+            <TextBlock Text="{Binding MinPrice, StringFormat={}{0:#}}"></TextBlock>
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="dt_NoMinPrice" DataType="vm:ProductViewModel">
+        <Border infr:FilterElement.Filter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=DataGrid}, 
+                                            Path=(infr:FilterElement.Filter), UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
+            <TextBlock  Text=""></TextBlock>
+            </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="dt_DangerMinPrice" DataType="vm:ProductViewModel">
+        <Border BorderBrush="{x:Null}" Background="Red" TextElement.Foreground="Black"
+                infr:FilterElement.Filter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=DataGrid}, 
+                                            Path=(infr:FilterElement.Filter), UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                >
+            <TextBlock Text="{Binding MinPrice, StringFormat={}{0:N2}}"></TextBlock>
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="dt_SuccessMinPrice" DataType="vm:ProductViewModel">
+        <Border BorderBrush="{x:Null}" Background="LawnGreen" TextElement.Foreground="Black"
+                infr:FilterElement.Filter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=DataGrid}, 
+                                            Path=(infr:FilterElement.Filter), UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                >
+            <TextBlock Text="{Binding MinPrice, StringFormat={}{0:N2}}"></TextBlock>
+        </Border>
+    </DataTemplate>
+
+    <!-- base price templates -->
+
+    <DataTemplate x:Key="dt_DefaultBasePrice" DataType="vm:ProductViewModel">
+        <Border infr:FilterElement.Filter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=DataGrid}, 
+                                            Path=(infr:FilterElement.Filter), UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
+            <TextBlock Text="{Binding Price, StringFormat={}{0:#}}"></TextBlock>
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="dt_DangerBasePrice" DataType="vm:ProductViewModel">
+        <Border BorderBrush="{x:Null}" Background="Red" TextElement.Foreground="Black"
+                infr:FilterElement.Filter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=DataGrid}, 
+                                            Path=(infr:FilterElement.Filter), UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                >
+            <TextBlock Text="{Binding Price, StringFormat={}{0:N2}}"></TextBlock>
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="dt_SuccessBasePrice" DataType="vm:ProductViewModel">
+        <Border BorderBrush="{x:Null}" Background="LawnGreen" TextElement.Foreground="Black"
+                infr:FilterElement.Filter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=DataGrid}, 
+                                            Path=(infr:FilterElement.Filter), UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                >
+            <TextBlock Text="{Binding Price, StringFormat={}{0:N2}}"></TextBlock>
+        </Border>
+    </DataTemplate>
+
+    <!-- first element -->
+    <DataTemplate x:Key="dt_FirstElement" DataType="vm:CompositePriceViewModel">
+        <Border x:Name="m_TemplateBorder" >
+            <TextBlock Text="{Binding Name}"></TextBlock>
+        </Border>
+
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Initiator}" Value="True">
+                <Setter TargetName="m_TemplateBorder" Property="Background" Value="LightGreen"></Setter>
+            </DataTrigger>
+        </DataTemplate.Triggers>
     </DataTemplate>
 
 </ResourceDictionary>

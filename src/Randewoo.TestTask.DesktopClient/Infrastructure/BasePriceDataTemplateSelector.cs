@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Randewoo.TestTask.DesktopClient.ViewModels;
 
 namespace Randewoo.TestTask.DesktopClient.Infrastructure
 {
-    public class MinPriceDataTemplateSelector : DataTemplateSelector
+    public class BasePriceDataTemplateSelector : DataTemplateSelector
     {
         public override DataTemplate SelectTemplate( object item, DependencyObject container )
         {
             if ( container is FrameworkElement element ) {
 
                 var filter = "";
-                string template = "dt_DefaultMinPrice";
+                string template = "dt_DefaultBasePrice";
 
                 if ( VisualTreeHelper.GetChildrenCount( container ) > 0 ) {
                     var d = VisualTreeHelper.GetChild( container, 0 );
@@ -31,22 +26,18 @@ namespace Randewoo.TestTask.DesktopClient.Infrastructure
                     if ( filter == Filters.All ) {
 
                         if ( pvm.MinPrice.HasValue && pvm.MinPrice < pvm.Price ) {
-                            template = "dt_SuccessMinPrice";
+                            template = "dt_DangerBasePrice";
                         }
 
                     }
-                    else if ( filter == Filters.MinOthers ) {
+                    else if ( filter == Filters.MinOthers || filter == Filters.MinSelf ) {
 
                         if (  pvm.MinPrice.HasValue && pvm.MinPrice < pvm.Price ) {
-                            template = "dt_SuccessMinPrice";
+                            template = "dt_DangerBasePrice";
                         }
                         else {
-                            template = "dt_NoMinPrice";
+                            template = "dt_SuccessBasePrice";
                         }
-                    }
-                    else if ( filter == Filters.MinSelf ) {
-
-
                     }
                 }
 

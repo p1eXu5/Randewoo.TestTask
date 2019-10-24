@@ -16,7 +16,11 @@ namespace Randewoo.TestTask.DesktopClient.Infrastructure
                 "Filter", 
                 typeof(string), 
                 typeof(FilterElement), 
-                new FrameworkPropertyMetadata( null,FrameworkPropertyMetadataOptions.AffectsRender ));
+                new FrameworkPropertyMetadata( 
+                    null,
+                    FrameworkPropertyMetadataOptions.AffectsRender 
+                        | FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender
+                        | FrameworkPropertyMetadataOptions.Inherits ));
 
         public static void SetFilter( DependencyObject d, string value )
         {

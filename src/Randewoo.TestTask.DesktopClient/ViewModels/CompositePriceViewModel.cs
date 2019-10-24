@@ -18,6 +18,8 @@ namespace Randewoo.TestTask.DesktopClient.ViewModels
         }
 
 
+        public bool Initiator { get; set; }
+
         public string Name => _priceRecord.Name;
 
         public double Price => _priceRecord.Price;

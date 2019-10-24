@@ -35,6 +35,7 @@
                 <ComboBox x:Name="m_FilterSelector" Style="{StaticResource st_MenuComboBox}"
                           SelectedIndex="0"
                           ItemsSource="{Binding Source={x:Static infr:Filters.FilterItems}}"
+                          SelectionChanged="M_FilterSelector_OnSelectionChanged"
                           >
                 </ComboBox>
                 <Button DataContext="{Binding ElementName=m_PriceSelector, Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}"
@@ -78,7 +79,8 @@
                     </Style.Triggers>
                 </Style>
                 <infr:DiffPriceTemplateSelector x:Key="ts_DiffTemplateSelector" />
-                <infr:MinPriceDataTemplateSelector x:Key="ts_FilterTemplateSelector" />
+                <infr:MinPriceDataTemplateSelector x:Key="ts_MinPriceTemplateSelector" />
+                <infr:BasePriceDataTemplateSelector x:Key="ts_BasePriceTemplateSelector" />
             </Grid.Resources>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -95,13 +97,16 @@
                       AutoGenerateColumns="False"
                       HorizontalGridLinesBrush="LightBlue"
                       VerticalGridLinesBrush="Silver"
+                      infr:FilterElement.Filter="{ Binding ElementName=m_FilterSelector, Path=SelectedItem, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }"
+
             >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Наименование" Binding="{Binding Name}" />
-                    <DataGridTextColumn Header="Стоимость" Binding="{Binding Price, StringFormat={}{0:N2}}" />
+                    <DataGridTemplateColumn Header="Стоимость" 
+                                            CellTemplateSelector="{StaticResource ts_BasePriceTemplateSelector}"
+                                            />
                     <DataGridTemplateColumn Header="Минимальная цена" 
-                                            CellTemplateSelector="{StaticResource ts_FilterTemplateSelector}"
-                                            infr:FilterElement.Filter="{Binding ElementName=m_FilterSelector, Path=SelectedItem}"
+                                            CellTemplateSelector="{StaticResource ts_MinPriceTemplateSelector}"
                                             />
                     <DataGridTemplateColumn Header="Разница" CellTemplateSelector="{StaticResource ts_DiffTemplateSelector}" />
                     <DataGridTextColumn Header="Прайс-лист" Binding="{Binding PriceName}" />
@@ -124,7 +129,7 @@
                       VerticalGridLinesBrush="Silver"
                       >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Наименование" Binding="{Binding Name}" />
+                    <DataGridTemplateColumn Header="Наименование" CellTemplate="{StaticResource dt_FirstElement}" />
                     <DataGridTextColumn Header="Стоимость" Binding="{Binding Price, StringFormat={}{0:N2}}" />
                     <DataGridTextColumn Header="Прайс-лист" Binding="{Binding PriceName}" />
                     <DataGridTextColumn Header="Поставщик" Binding="{Binding Distributor}" />

@@ -91,9 +91,13 @@ namespace Randewoo.TestTask.DesktopClient.ViewModels
                     _minPriceCalculator.Calculate( DistributorRepository.Instance );
                 }
 
-                return _minPriceCalculator.GetPriceRecords()
+                var coll = _minPriceCalculator.GetPriceRecords()
                                           .Select( t => new CompositePriceViewModel( t ) )
                                           .ToArray();
+
+                coll[ 0 ].Initiator = true;
+
+                return coll;
             }
         } 
 
