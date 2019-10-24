@@ -338,5 +338,5 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
-/documents/test.7z
-/documents/Randewoo.TestTask.vpp~*
+/documents/Randewoo.TestTask.vpp~5
+/documents/Randewoo.TestTask.vpp~6
