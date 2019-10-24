@@ -19,7 +19,7 @@ namespace Randewoo.TestTask.DataContext
         public virtual DbSet< Link > Links { get; set; }
         public virtual DbSet<Manufacturers> Manufacturers { get; set; }
         public virtual DbSet<Price> Prices { get; set; }
-        public virtual DbSet<PricesRecords> PricesRecords { get; set; }
+        public virtual DbSet<PriceRecord> PricesRecords { get; set; }
         public virtual DbSet<Product> Products { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -256,7 +256,7 @@ namespace Randewoo.TestTask.DataContext
                     .HasConstraintName("PRICESFOREIGNDISTRIBUTOR");
             });
 
-            modelBuilder.Entity< PricesRecords >(entity =>
+            modelBuilder.Entity< PriceRecord >(entity =>
             {
                 entity.HasKey(e => e.RecordIndex)
                     .HasName("PRICESRECORDSPRIMARY");

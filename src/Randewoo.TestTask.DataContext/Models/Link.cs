@@ -10,6 +10,6 @@ namespace Randewoo.TestTask.DataContext.Models
         public int Pricerecordindex { get; set; }
 
         public virtual Product Product { get; set; }
-        public virtual PricesRecords PriceRecord { get; set; }
+        public virtual PriceRecord PriceRecord { get; set; }
     }
 }

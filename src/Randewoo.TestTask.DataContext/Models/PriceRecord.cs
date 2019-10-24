@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Randewoo.TestTask.DataContext.Models
 {
-    public class PricesRecords
+    public class PriceRecord
     {
-        public PricesRecords()
+        public PriceRecord()
         {
             Links = new HashSet<Link>();
         }
