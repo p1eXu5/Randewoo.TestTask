@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Agbm.Wpf.MvvmBaseLibrary\Agbm.Wpf.MvvmBaseLibrary.csproj" />
-    <ProjectReference Include="..\..\Randewoo.TestTask.BusinessContext\Randewoo.TestTask.BusinessContext.csproj" />
+    <ProjectReference Include="..\Agbm.Wpf.MvvmBaseLibrary\Agbm.Wpf.MvvmBaseLibrary.csproj" />
+    <ProjectReference Include="..\Randewoo.TestTask.BusinessContext\Randewoo.TestTask.BusinessContext.csproj" />
     <ProjectReference Include="..\Randewoo.TestTask.DataContext\Randewoo.TestTask.DataContext.csproj" />
   </ItemGroup>
 

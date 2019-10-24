@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Randewoo.TestTask.DataContext\Randewoo.TestTask.DataContext.csproj" />
+    <ProjectReference Include="..\Randewoo.TestTask.DataContext\Randewoo.TestTask.DataContext.csproj" />
   </ItemGroup>
 
 </Project>

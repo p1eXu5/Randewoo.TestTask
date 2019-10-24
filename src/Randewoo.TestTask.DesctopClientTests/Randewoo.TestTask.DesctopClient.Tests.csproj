@@ -8,14 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.0.0" />
     <PackageReference Include="nunit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Randewoo.TestTask.DataContext\Randewoo.TestTask.DataContext.csproj" />
+    <ProjectReference Include="..\Randewoo.TestTask.DesktopClient\Randewoo.TestTask.DesktopClient.csproj" />
   </ItemGroup>
 
 </Project>
