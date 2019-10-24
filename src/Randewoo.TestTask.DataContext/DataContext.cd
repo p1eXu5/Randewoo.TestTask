@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Randewoo.TestTask.DataContext.TestContext">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAQAAAAAAgAAAAAEgAAAAAADAAAAAAAAAQ=</HashCode>
+      <FileName>TestContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Randewoo.TestTask.DataContext.Models.Products" Collapsed="true">
+    <Position X="4.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAA4kEdCAAABADAAAUAQAKCAEAAHCOUAABABAAAA=</HashCode>
+      <FileName>Models\Products.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Man" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Randewoo.TestTask.DataContext.Models.Pricesrecords" Collapsed="true">
+    <Position X="7.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEgAAAEAQAAABAAAAAAEAQAgAAAAAACGAAABAAAAEA=</HashCode>
+      <FileName>Models\Pricesrecords.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="PriceNavigation" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Randewoo.TestTask.DataContext.Models.Prices" Collapsed="true">
+    <Position X="10.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAgCAAAEAQAESAFgEAAAAAREIgAAAAAAAggAAgAACAA=</HashCode>
+      <FileName>Models\Prices.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Dis" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Randewoo.TestTask.DataContext.Models.Manufacturers" Collapsed="true">
+    <Position X="4.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAQAAAAgAAAADAAAAAQAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Models\Manufacturers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Randewoo.TestTask.DataContext.Models.Links" Collapsed="true">
+    <Position X="4.25" Y="3" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAQAAAAACAAAAAAAAAAAAAAEAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Models\Links.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="PricerecordindexNavigation" />
+      <Property Name="Catalogproduct" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Randewoo.TestTask.DataContext.Models.Distributors" Collapsed="true">
+    <Position X="13" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAEASAAAAAEAQAAAAUAAAAAAAAiAABAIAAAAgA=</HashCode>
+      <FileName>Models\Distributors.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
