@@ -2,11 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Randewoo.TestTask.DataContext.Models;
+using Randewoo.TestTask.DataContext.Tests.UnitTests.Factories;
 
 namespace Randewoo.TestTask.DataContext.Tests.UnitTests
 {
@@ -14,13 +16,15 @@ namespace Randewoo.TestTask.DataContext.Tests.UnitTests
     [TestFixture]
     public class TestDbContextExtensionsTests
     {
+        #region GetProducts tests
 
         [Test]
         public void GetProducts_PriceActive_PriceRecordsNotDeletetAndIsUsed_ReturnsAllProduct()
         {
             var priceId = Guid.NewGuid();
 
-            var price1 = new Price {
+            var price1 = new Price
+            {
                 Id = priceId,
                 IsActive = true,
                 Name = "Test Price 1",
@@ -28,7 +32,7 @@ namespace Randewoo.TestTask.DataContext.Tests.UnitTests
                 Namerange = "Test NameRange 1",
                 Pricerange = "",
                 PricesRecords = new[] {
-                    new PricesRecords {
+                    new PriceRecord {
                         RecordIndex = 1,
                         Used = true,
                         Deleted = false,
@@ -49,7 +53,7 @@ namespace Randewoo.TestTask.DataContext.Tests.UnitTests
                             },
                         }
                     },
-                    new PricesRecords {
+                    new PriceRecord {
                         RecordIndex = 2,
                         Used = true,
                         Deleted = false,
@@ -70,7 +74,7 @@ namespace Randewoo.TestTask.DataContext.Tests.UnitTests
                             },
                         }
                     },
-                    new PricesRecords {
+                    new PriceRecord {
                         RecordIndex = 3,
                         Used = false,
                         Deleted = false,
@@ -91,7 +95,7 @@ namespace Randewoo.TestTask.DataContext.Tests.UnitTests
                             },
                         }
                     },
-                    new PricesRecords {
+                    new PriceRecord {
                         RecordIndex = 4,
                         Used = true,
                         Deleted = true,
@@ -115,7 +119,8 @@ namespace Randewoo.TestTask.DataContext.Tests.UnitTests
                 }
             };
 
-            var price2 = new Price {
+            var price2 = new Price
+            {
                 Id = Guid.NewGuid(),
                 IsActive = true,
                 Name = "Test Price 2",
@@ -123,7 +128,7 @@ namespace Randewoo.TestTask.DataContext.Tests.UnitTests
                 Namerange = "Test NameRange 2",
                 Pricerange = "",
                 PricesRecords = new[] {
-                    new PricesRecords {
+                    new PriceRecord {
                         RecordIndex = 5,
                         Used = true,
                         Deleted = false,
@@ -147,36 +152,94 @@ namespace Randewoo.TestTask.DataContext.Tests.UnitTests
                 }
             };
 
-            var options = GetOptions( "GetProducts_PriceActive_PriceRecordsNotDeletetAndIsUsed_ReturnsAllProduct" );
+            var options = GetOptions();
+
+            using (var context = new TestDbContext(options))
+            {
+
+                context.Add(price1);
+                context.Add(price2);
+                context.SaveChanges();
+            }
+
+            using (var context = new TestDbContext(options))
+            {
+
+                var products = context.GetProducts(priceId).ToArray();
+                Assert.That(products.Length, Is.EqualTo(4));
+            }
+        }
+
+        #endregion
+
+
+        [ Test ]
+        public void GetDistributors_DistributorHasNoActivePrices_ReturnsNoDistributors()
+        {
+            var links = new[] {
+                DbTestCaseFactory.WithActiveProductLink,
+                DbTestCaseFactory.WithActiveProductLink,
+                DbTestCaseFactory.WithDeletedProductLink
+            };
+
+            var priceRecord = DbTestCaseFactory.UsedNotDeletedPriceRecord;
+            priceRecord.Links = links;
+
+            var price = DbTestCaseFactory.InactivePrice;
+            price.PricesRecords = new[] {
+                priceRecord,
+                DbTestCaseFactory.UsedNotDeletedPriceRecord
+            };
+
+            var distributor = DbTestCaseFactory.ActiveDistributor;
+            distributor.Prices = new[] {
+                price,
+                DbTestCaseFactory.InactivePrice,
+                DbTestCaseFactory.InactivePrice,
+                DbTestCaseFactory.InactivePrice,
+            };
+
+            var options = GetOptions();
 
             using ( var context = new TestDbContext(options) ) {
 
-                context.Add( price1 );
-                context.Add( price2 );
+                context.Distributors.Add( distributor );
                 context.SaveChanges();
             }
 
             using ( var context = new TestDbContext(options) ) {
 
-                var products = context.GetProducts( priceId ).ToArray();
-                Assert.That( products.Length, Is.EqualTo( 4 ) );
+                var actualDistributors = context.GetDistributors().ToArray();
+                Assert.That( actualDistributors.Length, Is.EqualTo( 0 ) );
             }
         }
 
-
         [ Test ]
-        public void GetDistributors_ByDefault_ReturnsActiveDistributors()
+        public void GetDistributors_DistributorHasActivePrices_WithUsedNotDeletedPriceRecords_ReturnsDistributorsWithPriceRecords()
         {
-            var distributors = new[] {
-                new Distributor { Id = Guid.NewGuid(), Active = true }, 
-                new Distributor { Id = Guid.NewGuid(), Active = false }, 
+            var links = new[] {
+                DbTestCaseFactory.WithActiveProductLink,
+                DbTestCaseFactory.WithActiveProductLink,
+                DbTestCaseFactory.WithDeletedProductLink
             };
 
-            var options = GetOptions( "GetDistributors_ByDefault_ReturnsActiveDistributors" );
+            var priceRecord = DbTestCaseFactory.UsedNotDeletedPriceRecord;
+            priceRecord.Links = links;
+
+            var price = DbTestCaseFactory.ActivePrice;
+            price.PricesRecords = new[] {
+                priceRecord,
+                DbTestCaseFactory.UsedNotDeletedPriceRecord
+            };
+
+            var distributor = DbTestCaseFactory.ActiveDistributor;
+            distributor.Prices = new[] { price };
+
+            var options = GetOptions();
 
             using ( var context = new TestDbContext(options) ) {
 
-                context.Distributors.AddRange( distributors );
+                context.Distributors.Add( distributor );
                 context.SaveChanges();
             }
 
@@ -184,22 +247,95 @@ namespace Randewoo.TestTask.DataContext.Tests.UnitTests
 
                 var actualDistributors = context.GetDistributors().ToArray();
                 Assert.That( actualDistributors.Length, Is.EqualTo( 1 ) );
-                Assert.True( actualDistributors[0].Active );
+
+                Assert.That( actualDistributors[0].Prices.First().PricesRecords.Count(), Is.GreaterThan( 0 ) );
             }
         }
 
         [ Test ]
-        public void GetDistributors_ByDefault_ReturnsDistributorsWithPrices()
+        public void GetDistributors_DistributorHasActivePrices_WithNotUsedOrDeletedPriceRecords_ReturnsNoDistributors()
         {
+            var links = new[] {
+                DbTestCaseFactory.WithActiveProductLink,
+                DbTestCaseFactory.WithActiveProductLink,
+                DbTestCaseFactory.WithDeletedProductLink
+            };
 
+            var priceRecord = DbTestCaseFactory.UsedDeletedPriceRecord;
+            priceRecord.Links = links;
+
+            var price = DbTestCaseFactory.ActivePrice;
+            price.PricesRecords = new[] {
+                priceRecord,
+                DbTestCaseFactory.NotUsedDeletedPriceRecord,
+                DbTestCaseFactory.NotUsedNotDeletedPriceRecord
+            };
+
+            var distributor = DbTestCaseFactory.ActiveDistributor;
+            distributor.Prices = new[] { price };
+
+            var options = GetOptions();
+
+            using ( var context = new TestDbContext(options) ) {
+
+                context.Distributors.Add( distributor );
+                context.SaveChanges();
+            }
+
+            using ( var context = new TestDbContext(options) ) {
+
+                var actualDistributors = context.GetDistributors().ToArray();
+                Assert.That( actualDistributors.Length, Is.EqualTo( 0 ) );
+            }
         }
+
+        [ Test ]
+        public void GetDistributors_DistributorHasActivePrices_WithUsedNotDeletedPriceRecords_WithNotDeletedProducts_ReturnsDistributorsWithProducts()
+        {
+            var links = new[] {
+                DbTestCaseFactory.WithActiveProductLink,
+                DbTestCaseFactory.WithActiveProductLink,
+                DbTestCaseFactory.WithDeletedProductLink
+            };
+
+            var priceRecord = DbTestCaseFactory.UsedNotDeletedPriceRecord;
+            priceRecord.Links = links;
+
+            var price = DbTestCaseFactory.ActivePrice;
+            price.PricesRecords = new[] {
+                priceRecord,
+                DbTestCaseFactory.UsedDeletedPriceRecord,
+                DbTestCaseFactory.NotUsedDeletedPriceRecord,
+                DbTestCaseFactory.NotUsedNotDeletedPriceRecord
+            };
+
+            var distributor = DbTestCaseFactory.ActiveDistributor;
+            distributor.Prices = new[] { price };
+
+            var options = GetOptions();
+
+            using ( var context = new TestDbContext(options) ) {
+
+                context.Distributors.Add( distributor );
+                context.SaveChanges();
+            }
+
+            using ( var context = new TestDbContext(options) ) {
+
+                var actualDistributors = context.GetDistributors().ToArray();
+                Assert.That( actualDistributors.Length, Is.EqualTo( 1 ) );
+
+                Assert.NotNull( actualDistributors[0].Prices.First().PricesRecords.First().Links.First().Product );
+            }
+        }
+
 
         #region factory
         // Insert factory methods here:
 
-        private DbContextOptions< TestDbContext > GetOptions( string dbName )
+        private DbContextOptions< TestDbContext > GetOptions( [CallerMemberName] string dbName = null )
         {
-            return new DbContextOptionsBuilder< TestDbContext >().UseInMemoryDatabase( dbName ).Options;
+            return new DbContextOptionsBuilder< TestDbContext >().UseInMemoryDatabase( dbName ?? "TestDb" ).Options;
         }
 
         #endregion

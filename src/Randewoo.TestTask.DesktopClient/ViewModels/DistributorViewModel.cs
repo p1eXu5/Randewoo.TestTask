@@ -15,8 +15,9 @@ namespace Randewoo.TestTask.DesktopClient.ViewModels
         public DistributorViewModel( Distributor distributor )
         {
             _distributor = distributor;
+
             PriceVmCollection = _distributor.Prices
-                                            .Where( p => p.IsActive.HasValue && p.IsActive.Value && p.PricesRecords.Any( pr => pr.Used && !pr.Deleted ) )
+                                            .Where( p => p.IsActive.HasValue && p.IsActive.Value )
                                             .OrderBy( p => p.Name )
                                             .Select( p => new PriceViewModel( p ) ).ToArray();
 

@@ -16,14 +16,12 @@ namespace Randewoo.TestTask.DesktopClient.ViewModels
     {
         private readonly TestDbContext _dbContext;
         private DistributorViewModel _selectedDistributorVm;
-        private ProductViewModel[] _productVmCollection;
 
         public MainViewModel( TestDbContext dbContext )
         {
             void LoadDistributors()
             {
                 DistributorVmCollection = _dbContext.GetDistributors()
-                                                    .Where( d => d.Active && d.Prices.Any( p => p.IsActive.HasValue && p.IsActive.Value ) )
                                                     .OrderBy( d => d.Name )
                                                     .Select( d => new DistributorViewModel( d ) )
                                                     .ToArray();
@@ -47,23 +45,6 @@ namespace Randewoo.TestTask.DesktopClient.ViewModels
                     OnPropertyChanged();
                 }
             }
-        }
-
-        public ICollection< ProductViewModel > ProductVmCollection => _productVmCollection;
-
-
-        public ICommand AnalysisAsyncCommand => new MvvmAsyncCommand( AnalysisAsync, CanAnalyse );
-
-        private async Task AnalysisAsync( object o )
-        {
-            var products = await _dbContext.GetProducts( SelectedDistributorVm.SelectedPriceVm.Id ).ToArrayAsync();
-            _productVmCollection = products.Select( p => new ProductViewModel( p ) ).ToArray();
-            OnPropertyChanged( nameof( ProductVmCollection ) );
-        }
-
-        public bool CanAnalyse( object o )
-        {
-            return SelectedDistributorVm?.SelectedPriceVm != null;
         }
     }
 }

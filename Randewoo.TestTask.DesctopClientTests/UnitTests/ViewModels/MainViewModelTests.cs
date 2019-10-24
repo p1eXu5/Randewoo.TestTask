@@ -71,10 +71,10 @@ namespace Randewoo.TestTask.DesctopClientTests.UnitTests.ViewModels
                     Name = "Test Loaded Price", 
                     IsActive = true,
                     PricesRecords = new[] {
-                        new PricesRecords { Used = true, Deleted = false }, 
-                        new PricesRecords { Used = false, Deleted = false }, 
-                        new PricesRecords { Used = true, Deleted = true }, 
-                        new PricesRecords { Used = false, Deleted = true }, 
+                        new PriceRecord { Used = true, Deleted = false }, 
+                        new PriceRecord { Used = false, Deleted = false }, 
+                        new PriceRecord { Used = true, Deleted = true }, 
+                        new PriceRecord { Used = false, Deleted = true }, 
                     },
                     DistributorId = distributor.Id
                 },
@@ -83,10 +83,10 @@ namespace Randewoo.TestTask.DesctopClientTests.UnitTests.ViewModels
                     Name = "Test Not Loaded Price 1", 
                     IsActive = false,
                     PricesRecords = new[] {
-                        new PricesRecords { Used = true, Deleted = false }, 
-                        new PricesRecords { Used = false, Deleted = false }, 
-                        new PricesRecords { Used = true, Deleted = true }, 
-                        new PricesRecords { Used = false, Deleted = true }, 
+                        new PriceRecord { Used = true, Deleted = false }, 
+                        new PriceRecord { Used = false, Deleted = false }, 
+                        new PriceRecord { Used = true, Deleted = true }, 
+                        new PriceRecord { Used = false, Deleted = true }, 
                     },
                     DistributorId = distributor.Id
                 },
@@ -95,9 +95,9 @@ namespace Randewoo.TestTask.DesctopClientTests.UnitTests.ViewModels
                     Name = "Test Not Loaded Price 2", 
                     IsActive = true,
                     PricesRecords = new[] {
-                        new PricesRecords { Used = false, Deleted = false }, 
-                        new PricesRecords { Used = true, Deleted = true }, 
-                        new PricesRecords { Used = false, Deleted = true }, 
+                        new PriceRecord { Used = false, Deleted = false }, 
+                        new PriceRecord { Used = true, Deleted = true }, 
+                        new PriceRecord { Used = false, Deleted = true }, 
                     },
                     DistributorId = distributor.Id
                 }
