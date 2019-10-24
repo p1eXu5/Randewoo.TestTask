@@ -14,23 +14,6 @@ namespace Randewoo.TestTask.DataContext.Tests.UnitTests
     [TestFixture]
     public class TestDbContextExtensionsTests
     {
-        private SqliteConnection _connection;
-        private DbContextOptions< TestDbContext > _options;
-
-        //[ SetUp ]
-        public void OpenConnection()
-        {
-            _connection = new SqliteConnection("DataSource=:memory:");
-            _connection.Open();
-
-            _options = new DbContextOptionsBuilder< TestDbContext >().UseSqlite( _connection ).Options;
-        }
-
-        //[ TearDown ]
-        public void CloseConnection()
-        {
-            _connection?.Close();
-        }
 
         [Test]
         public void GetProducts_PriceActive_PriceRecordsNotDeletetAndIsUsed_ReturnsAllProduct()
