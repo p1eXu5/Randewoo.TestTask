@@ -147,15 +147,13 @@ namespace Randewoo.TestTask.DataContext.Tests.UnitTests
                 }
             };
 
-            var options = GetOptions( "Test 1" );
+            var options = GetOptions( "GetProducts_PriceActive_PriceRecordsNotDeletetAndIsUsed_ReturnsAllProduct" );
 
             using ( var context = new TestDbContext(options) ) {
 
                 context.Add( price1 );
                 context.Add( price2 );
                 context.SaveChanges();
-
-                var p = context.Prices.ToArray();
             }
 
             using ( var context = new TestDbContext(options) ) {
@@ -163,6 +161,37 @@ namespace Randewoo.TestTask.DataContext.Tests.UnitTests
                 var products = context.GetProducts( priceId ).ToArray();
                 Assert.That( products.Length, Is.EqualTo( 4 ) );
             }
+        }
+
+
+        [ Test ]
+        public void GetDistributors_ByDefault_ReturnsActiveDistributors()
+        {
+            var distributors = new[] {
+                new Distributor { Id = Guid.NewGuid(), Active = true }, 
+                new Distributor { Id = Guid.NewGuid(), Active = false }, 
+            };
+
+            var options = GetOptions( "GetDistributors_ByDefault_ReturnsActiveDistributors" );
+
+            using ( var context = new TestDbContext(options) ) {
+
+                context.Distributors.AddRange( distributors );
+                context.SaveChanges();
+            }
+
+            using ( var context = new TestDbContext(options) ) {
+
+                var actualDistributors = context.GetDistributors().ToArray();
+                Assert.That( actualDistributors.Length, Is.EqualTo( 1 ) );
+                Assert.True( actualDistributors[0].Active );
+            }
+        }
+
+        [ Test ]
+        public void GetDistributors_ByDefault_ReturnsDistributorsWithPrices()
+        {
+
         }
 
         #region factory

@@ -12,6 +12,7 @@ namespace Randewoo.TestTask.DataContext
             return context.Distributors
                           .Include( d => d.Prices )
                           .ThenInclude( p => p.PricesRecords )
+                          .Where( d => d.Active )
                           .AsQueryable().AsNoTracking();
         }
 
