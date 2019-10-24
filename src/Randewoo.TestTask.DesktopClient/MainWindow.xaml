@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Randewoo.TestTask.DesktopClient"
         xmlns:vm="clr-namespace:Randewoo.TestTask.DesktopClient.ViewModels"
+        xmlns:infr="clr-namespace:Randewoo.TestTask.DesktopClient.Infrastructure"
+
         d:DataContext="{ d:DesignInstance vm:MainViewModel}"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="900">
@@ -30,8 +32,11 @@
                           DisplayMemberPath="Name"
                           SelectedItem="{Binding SelectedPriceVm}"
                           />
-                <ComboBox Style="{StaticResource st_MenuComboBox}" 
-                          />
+                <ComboBox x:Name="m_FilterSelector" Style="{StaticResource st_MenuComboBox}"
+                          SelectedIndex="0"
+                          ItemsSource="{Binding Source={x:Static infr:Filters.FilterItems}}"
+                          >
+                </ComboBox>
                 <Button DataContext="{Binding ElementName=m_PriceSelector, Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}"
                         Command="{Binding AnalysisCommand}"
                         >Анализ</Button>
@@ -72,12 +77,15 @@
                         </Trigger>
                     </Style.Triggers>
                 </Style>
+                <infr:DiffPriceTemplateSelector x:Key="ts_DiffTemplateSelector" />
+                <infr:MinPriceDataTemplateSelector x:Key="ts_FilterTemplateSelector" />
             </Grid.Resources>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="3" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
+
             <DataGrid x:Name="m_ProductTable"
                       DataContext="{Binding ElementName=m_PriceSelector, Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding ProductVmCollection}" 
@@ -87,13 +95,16 @@
                       AutoGenerateColumns="False"
                       HorizontalGridLinesBrush="LightBlue"
                       VerticalGridLinesBrush="Silver"
-                      >
+            >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Наименование" Binding="{Binding Name}" />
-                    <DataGridTextColumn Header="Цена" Binding="{Binding Price}" />
-                    <DataGridTextColumn Header="Минимальная цена" Binding="{Binding MinPrice}" />
-                    <DataGridTextColumn Header="Разница" Binding="{Binding DiffPrice}" />
-                    <DataGridTextColumn Header="Прайс-лист" Binding="{Binding PriceList}" />
+                    <DataGridTextColumn Header="Стоимость" Binding="{Binding Price, StringFormat={}{0:N2}}" />
+                    <DataGridTemplateColumn Header="Минимальная цена" 
+                                            CellTemplateSelector="{StaticResource ts_FilterTemplateSelector}"
+                                            infr:FilterElement.Filter="{Binding ElementName=m_FilterSelector, Path=SelectedItem}"
+                                            />
+                    <DataGridTemplateColumn Header="Разница" CellTemplateSelector="{StaticResource ts_DiffTemplateSelector}" />
+                    <DataGridTextColumn Header="Прайс-лист" Binding="{Binding PriceName}" />
                     <DataGridTextColumn Header="Поставщик" Binding="{Binding Distributor}" />
                     <DataGridTextColumn Header="Примечание" Binding="{Binding Notice}" />
                 </DataGrid.Columns>
@@ -104,7 +115,7 @@
                        Margin="0,0,0,0" />
             <DataGrid x:Name="m_PricesTable" Grid.Row="2"
                       DataContext="{Binding ElementName=m_ProductTable, Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}"
-                      ItemsSource="{Binding PriceVmCollection}" 
+                      ItemsSource="{Binding CompositePriceVmCollection}" 
                       IsReadOnly="True"
                       RowStyle="{StaticResource RowStyleWithAlternation}"
                       AlternationCount="2"
@@ -112,7 +123,12 @@
                       HorizontalGridLinesBrush="LightBlue"
                       VerticalGridLinesBrush="Silver"
                       >
-
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Наименование" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Стоимость" Binding="{Binding Price, StringFormat={}{0:N2}}" />
+                    <DataGridTextColumn Header="Прайс-лист" Binding="{Binding PriceName}" />
+                    <DataGridTextColumn Header="Поставщик" Binding="{Binding Distributor}" />
+                </DataGrid.Columns>
             </DataGrid>
         </Grid>
     </DockPanel>

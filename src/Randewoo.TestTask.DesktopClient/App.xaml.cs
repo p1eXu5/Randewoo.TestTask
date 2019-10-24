@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.EntityFrameworkCore;
+using Randewoo.TestTask.BusinessContext;
 using Randewoo.TestTask.DataContext;
+using Randewoo.TestTask.DesktopClient.Infrastructure;
 using Randewoo.TestTask.DesktopClient.ViewModels;
 
 namespace Randewoo.TestTask.DesktopClient
@@ -26,7 +23,12 @@ namespace Randewoo.TestTask.DesktopClient
                 var options = new DbContextOptionsBuilder< TestDbContext >( ).UseSqlServer( connectionString ).Options;
 
                 var dbContext = new TestDbContext( options );
-                var mvm = new MainViewModel( dbContext );
+                DistributorRepository.SetTestDbContext( dbContext );
+
+                var mvm = new MainViewModel();
+
+                PriceCalculatorStrategyFactory.TestDbContext = dbContext;
+
                 var mainWindow = new MainWindow {
                     DataContext = mvm,
                 };

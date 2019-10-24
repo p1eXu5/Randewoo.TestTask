@@ -7,7 +7,7 @@ namespace Randewoo.TestTask.DataContext.Models
     {
         public Price()
         {
-            PricesRecords = new HashSet<PriceRecord>();
+            PriceRecords = new HashSet<PriceRecord>();
         }
 
         public Guid Id { get; set; }
@@ -33,6 +33,6 @@ namespace Randewoo.TestTask.DataContext.Models
         public Guid? DistributorId { get; set; }
         public Distributor Distributor { get; set; }
 
-        public ICollection<PriceRecord> PricesRecords { get; set; }
+        public ICollection<PriceRecord> PriceRecords { get; set; }
     }
 }

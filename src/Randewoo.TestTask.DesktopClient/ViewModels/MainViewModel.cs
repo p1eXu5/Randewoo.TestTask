@@ -9,6 +9,7 @@ using Agbm.Wpf.MvvmBaseLibrary;
 using Microsoft.EntityFrameworkCore;
 using Randewoo.TestTask.DataContext;
 using Randewoo.TestTask.DataContext.Models;
+using Randewoo.TestTask.DesktopClient.Infrastructure;
 
 namespace Randewoo.TestTask.DesktopClient.ViewModels
 {
@@ -16,11 +17,11 @@ namespace Randewoo.TestTask.DesktopClient.ViewModels
     {
         private DistributorViewModel _selectedDistributorVm;
 
-        public MainViewModel( TestDbContext dbContext )
+        public MainViewModel()
         {
             void LoadDistributors()
             {
-                DistributorVmCollection = dbContext.GetDistributors()
+                DistributorVmCollection = DistributorRepository.Instance.Distributors
                                                     .OrderBy( d => d.Name )
                                                     .Select( d => new DistributorViewModel( d ) )
                                                     .ToArray();

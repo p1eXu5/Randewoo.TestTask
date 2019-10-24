@@ -30,11 +30,11 @@ namespace Randewoo.TestTask.DesktopClient.ViewModels
 
         private void AnalysisAsync( object o )
         {
-            _productVmCollection = _price.PricesRecords
+            _productVmCollection = _price.PriceRecords
                                          .Where( pr => pr.Used && !pr.Deleted )
                                          .Select( pr => pr.Links )
                                          .Select( lc => lc.Where( l => !l.Product.Deleted )
-                                                          .Select( l => new ProductViewModel( l.Product ) ) )
+                                                          .Select( l => new ProductViewModel( l.Product, _price ) ) )
                                          .Aggregate( new List<ProductViewModel>(), (acc, pvms) => {
                                              acc.AddRange( pvms );
                                              return acc;

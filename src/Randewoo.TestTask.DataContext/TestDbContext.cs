@@ -303,7 +303,7 @@ namespace Randewoo.TestTask.DataContext
                 entity.Property(e => e.Used).HasColumnName("USED");
 
                 entity.HasOne(d => d.PriceNavigation)
-                    .WithMany(p => p.PricesRecords)
+                    .WithMany(p => p.PriceRecords)
                     .HasForeignKey(d => d.Priceid)
                     .HasConstraintName("PRICESRECORDSFOREIGNPRICE");
             });

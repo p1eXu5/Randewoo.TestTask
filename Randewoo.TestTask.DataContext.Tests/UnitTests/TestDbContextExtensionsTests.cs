@@ -31,7 +31,7 @@ namespace Randewoo.TestTask.DataContext.Tests.UnitTests
                 Sheet = "Test Sheet 1",
                 Namerange = "Test NameRange 1",
                 Pricerange = "",
-                PricesRecords = new[] {
+                PriceRecords = new[] {
                     new PriceRecord {
                         RecordIndex = 1,
                         Used = true,
@@ -127,7 +127,7 @@ namespace Randewoo.TestTask.DataContext.Tests.UnitTests
                 Sheet = "Test Sheet 2",
                 Namerange = "Test NameRange 2",
                 Pricerange = "",
-                PricesRecords = new[] {
+                PriceRecords = new[] {
                     new PriceRecord {
                         RecordIndex = 5,
                         Used = true,
@@ -186,7 +186,7 @@ namespace Randewoo.TestTask.DataContext.Tests.UnitTests
             priceRecord.Links = links;
 
             var price = DbTestCaseFactory.InactivePrice;
-            price.PricesRecords = new[] {
+            price.PriceRecords = new[] {
                 priceRecord,
                 DbTestCaseFactory.UsedNotDeletedPriceRecord
             };
@@ -227,7 +227,7 @@ namespace Randewoo.TestTask.DataContext.Tests.UnitTests
             priceRecord.Links = links;
 
             var price = DbTestCaseFactory.ActivePrice;
-            price.PricesRecords = new[] {
+            price.PriceRecords = new[] {
                 priceRecord,
                 DbTestCaseFactory.UsedNotDeletedPriceRecord
             };
@@ -248,7 +248,7 @@ namespace Randewoo.TestTask.DataContext.Tests.UnitTests
                 var actualDistributors = context.GetDistributors().ToArray();
                 Assert.That( actualDistributors.Length, Is.EqualTo( 1 ) );
 
-                Assert.That( actualDistributors[0].Prices.First().PricesRecords.Count(), Is.GreaterThan( 0 ) );
+                Assert.That( actualDistributors[0].Prices.First().PriceRecords.Count(), Is.GreaterThan( 0 ) );
             }
         }
 
@@ -265,7 +265,7 @@ namespace Randewoo.TestTask.DataContext.Tests.UnitTests
             priceRecord.Links = links;
 
             var price = DbTestCaseFactory.ActivePrice;
-            price.PricesRecords = new[] {
+            price.PriceRecords = new[] {
                 priceRecord,
                 DbTestCaseFactory.NotUsedDeletedPriceRecord,
                 DbTestCaseFactory.NotUsedNotDeletedPriceRecord
@@ -302,7 +302,7 @@ namespace Randewoo.TestTask.DataContext.Tests.UnitTests
             priceRecord.Links = links;
 
             var price = DbTestCaseFactory.ActivePrice;
-            price.PricesRecords = new[] {
+            price.PriceRecords = new[] {
                 priceRecord,
                 DbTestCaseFactory.UsedDeletedPriceRecord,
                 DbTestCaseFactory.NotUsedDeletedPriceRecord,
@@ -325,7 +325,7 @@ namespace Randewoo.TestTask.DataContext.Tests.UnitTests
                 var actualDistributors = context.GetDistributors().ToArray();
                 Assert.That( actualDistributors.Length, Is.EqualTo( 1 ) );
 
-                Assert.NotNull( actualDistributors[0].Prices.First().PricesRecords.First().Links.First().Product );
+                Assert.NotNull( actualDistributors[0].Prices.First().PriceRecords.First().Links.First().Product );
             }
         }
 

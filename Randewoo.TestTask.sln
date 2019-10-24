@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agbm.Wpf.MvvmBaseLibrary", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Randewoo.TestTask.DesctopClient.Tests", "Randewoo.TestTask.DesctopClientTests\Randewoo.TestTask.DesctopClient.Tests.csproj", "{8E6F7154-53DF-42E7-B9D2-9E0DA75D3C58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Randewoo.TestTask.DataContext.Tests", "Randewoo.TestTask.DataContext.Tests\Randewoo.TestTask.DataContext.Tests.csproj", "{2E713CBA-CDA4-4C91-9031-9EED3CC3C971}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Randewoo.TestTask.DataContext.Tests", "Randewoo.TestTask.DataContext.Tests\Randewoo.TestTask.DataContext.Tests.csproj", "{2E713CBA-CDA4-4C91-9031-9EED3CC3C971}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Randewoo.TestTask.BusinessContext", "Randewoo.TestTask.BusinessContext\Randewoo.TestTask.BusinessContext.csproj", "{64A98ACF-260B-4D75-B05B-624686C37D15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{2E713CBA-CDA4-4C91-9031-9EED3CC3C971}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E713CBA-CDA4-4C91-9031-9EED3CC3C971}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E713CBA-CDA4-4C91-9031-9EED3CC3C971}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64A98ACF-260B-4D75-B05B-624686C37D15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64A98ACF-260B-4D75-B05B-624686C37D15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64A98ACF-260B-4D75-B05B-624686C37D15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64A98ACF-260B-4D75-B05B-624686C37D15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +59,7 @@ Global
 		{97F11ED8-7159-4830-B0D7-B2111902DCE6} = {BCE93D61-D7F3-4126-AF32-FE4CF76C6407}
 		{8E6F7154-53DF-42E7-B9D2-9E0DA75D3C58} = {E68CBD17-21E2-42B3-98B8-5E10D8353D69}
 		{2E713CBA-CDA4-4C91-9031-9EED3CC3C971} = {E68CBD17-21E2-42B3-98B8-5E10D8353D69}
+		{64A98ACF-260B-4D75-B05B-624686C37D15} = {BCE93D61-D7F3-4126-AF32-FE4CF76C6407}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {39E4DF5B-81F8-41E4-A1CD-19732F1CAD06}
