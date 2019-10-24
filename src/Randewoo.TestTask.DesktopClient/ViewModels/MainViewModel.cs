@@ -14,21 +14,18 @@ namespace Randewoo.TestTask.DesktopClient.ViewModels
 {
     public class MainViewModel : ViewModel
     {
-        private readonly TestDbContext _dbContext;
         private DistributorViewModel _selectedDistributorVm;
 
         public MainViewModel( TestDbContext dbContext )
         {
             void LoadDistributors()
             {
-                DistributorVmCollection = _dbContext.GetDistributors()
+                DistributorVmCollection = dbContext.GetDistributors()
                                                     .OrderBy( d => d.Name )
                                                     .Select( d => new DistributorViewModel( d ) )
                                                     .ToArray();
             }
 
-
-            _dbContext = dbContext;
 
             LoadDistributors();
             SelectedDistributorVm = DistributorVmCollection.FirstOrDefault();
